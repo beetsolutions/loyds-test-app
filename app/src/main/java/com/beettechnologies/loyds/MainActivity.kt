@@ -9,16 +9,15 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.beettechnologies.loyds.account.login.presentation.LoginView
 import com.beettechnologies.loyds.app.theme.LoydsTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             LoydsTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
+                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
                     LoginView()
                 }
             }

@@ -5,15 +5,12 @@ object Dependencies {
     const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:2.37"
 
     private const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
-
     private const val appcompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     private const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
     private const val material = "com.google.android.material:material:${Versions.material}"
-
     private const val androidCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
     private const val jsonSerializer = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0"
     private const val annotation = "androidx.annotation:annotation:1.2.0"
-
     private const val runtime = "androidx.lifecycle:lifecycle-runtime:2.4.0"
     private const val runtimeKt = "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
     private const val extensions = "androidx.lifecycle:lifecycle-extensions:2.1.0"
