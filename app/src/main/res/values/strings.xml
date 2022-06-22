@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Loyds</string>
+    <string name="account_view_phone_number_label">Enter the phone number you gave us when you registered and we\'ll send you a login code.</string>
+    <string name="account_view_forgot_password_label">Forgot password?</string>
+    <string name="account_view_password_label">Password</string>
+    <string name="account_view_password_placeholder_label">Enter your password</string>
+    <string name="account_view_reset_password_label">Reset password</string>
+    <string name="account_view_login_label">Login</string>
+    <string name="account_view_register_label">Register</string>
+    <string name="account_view_signup_label">Signup</string>
+    <string name="account_view_username_label">Username</string>
+    <string name="account_view_username_placeholder_label">Enter your username</string>
+    <string name="account_view_email_label">Email</string>
+    <string name="account_view_email_placeholder_label">Enter your email</string>
+
 </resources>

@@ -5,5 +5,5 @@ import com.beettechnologies.loyds.common.data.model.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface SignUpRepository {
-    suspend fun signup(username: String, password: String, email: String): Flow<Resource<UserModel>>
+    suspend fun signup(email: String, username: String, password: String): Flow<Resource<UserModel>>
 }

@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class SignUpRepositoryImpl @Inject constructor(private val signUpApi: SignUpApi) : SignUpRepository {
 
-    override suspend fun signup(username: String, password: String, email: String): Flow<Resource<UserModel>> {
+    override suspend fun signup(email: String, username: String, password: String): Flow<Resource<UserModel>> {
         return object : NetworkResource<UserModel, SignUpResponse>() {
             override suspend fun loadResults(item: SignUpResponse?): Flow<UserModel> {
                 return flow {
