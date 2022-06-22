@@ -25,6 +25,8 @@ fun LoginView(modifier: Modifier = Modifier) {
 
     val viewModel = hiltViewModel<LoginViewModel>()
     val isLoading = viewModel.isLoading.collectAsState()
+    val hasError = viewModel.hasError.collectAsState()
+    val errorMessage = viewModel.errorMessage.collectAsState()
 
     var username by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }

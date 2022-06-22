@@ -2,6 +2,7 @@ package com.beettechnologies.loyds.app.di
 
 import android.content.Context
 import com.beettechnologies.loyds.app.App
+import com.beettechnologies.loyds.app.AppStorage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,5 +18,11 @@ object AppModule {
     @Provides
     fun provideApplication(@ApplicationContext context: Context): App {
         return context as App
+    }
+
+    @Singleton
+    @Provides
+    fun provideAppStorage(@ApplicationContext context: Context): AppStorage {
+        return AppStorage(context)
     }
 }

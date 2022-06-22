@@ -72,4 +72,5 @@ dependencies {
     debugImplementation (Dependencies.debugLibraries)
     testImplementation(Dependencies.testLibraries)
     androidTestImplementation(Dependencies.androidTestLibraries)
+    kaptAndroidTest (Dependencies.hiltCompiler)
 }

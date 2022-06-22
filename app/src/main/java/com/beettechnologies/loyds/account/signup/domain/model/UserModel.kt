@@ -1,4 +1,3 @@
 package com.beettechnologies.loyds.account.signup.domain.model
 
-class UserModel {
-}
+data class UserModel(val id: String?, val isAlive: Boolean, val userId: String?)

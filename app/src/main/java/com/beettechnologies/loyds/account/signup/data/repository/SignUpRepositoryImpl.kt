@@ -19,7 +19,7 @@ class SignUpRepositoryImpl @Inject constructor(private val signUpApi: SignUpApi)
         return object : NetworkResource<UserModel, SignUpResponse>() {
             override suspend fun loadResults(item: SignUpResponse?): Flow<UserModel> {
                 return flow {
-                    UserModel()
+
                 }
             }
 

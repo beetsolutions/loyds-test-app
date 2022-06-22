@@ -38,7 +38,7 @@ object Dependencies {
     private const val accompanistInsets = "com.google.accompanist:accompanist-insets:0.22.1-rc"
     private const val composeHiltNavigation = "androidx.hilt:hilt-navigation-compose:1.0.0-rc01"
 
-    private const val hiltCompiler = "com.google.dagger:hilt-compiler:2.37"
+    const val hiltCompiler = "com.google.dagger:hilt-compiler:2.37"
     private const val hiltAndroid = "com.google.dagger:hilt-android:2.37"
     private const val hiltLifecycleViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
 
@@ -48,6 +48,9 @@ object Dependencies {
 
     private const val uiTest = "androidx.compose.ui:ui-test:1.2.0-alpha06"
     private const val uiTestJUnit4 = "androidx.compose.ui:ui-test-junit4:1.2.0-alpha06"
+
+    const val hiltTesting = "com.google.dagger:hilt-android-testing:2.37"
+    const val navigation = "androidx.hilt:hilt-navigation-compose:1.0.0"
 
     val appLibraries = arrayListOf<String>().apply {
         add(kotlinStdLib)
@@ -89,6 +92,8 @@ object Dependencies {
         add(espressoCore)
         add(uiTest)
         add(uiTestJUnit4)
+        add(hiltTesting)
+        add(hiltAndroid)
     }
     val testLibraries = arrayListOf<String>().apply {
         add(junit)

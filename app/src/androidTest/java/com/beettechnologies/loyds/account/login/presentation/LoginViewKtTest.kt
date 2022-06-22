@@ -1,22 +1,63 @@
 package com.beettechnologies.loyds.account.login.presentation
 
-import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.*
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.junit.After
-import org.junit.Before
+import com.beettechnologies.loyds.MainActivity
+import com.beettechnologies.loyds.R
 import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class LoginViewKtTest {
     @get:Rule
-    val composeTestRule = createComposeRule()
+    val composeTestRule = createAndroidComposeRule<MainActivity>()
 
-    @Before
-    fun setUp() {
+    private val activity by lazy { composeTestRule.activity }
+
+    @Test
+    fun loginUiElementsShown() {
+        composeTestRule.onNodeWithText(activity.getString(R.string.account_view_phone_number_label)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(activity.getString(R.string.account_view_username_label)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(activity.getString(R.string.account_view_username_placeholder_label)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(activity.getString(R.string.account_view_password_label)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(activity.getString(R.string.account_view_password_placeholder_label)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(activity.getString(R.string.account_view_forgot_password_label)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(activity.getString(R.string.account_view_register_label)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(activity.getString(R.string.account_view_login_label)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(activity.getString(R.string.account_view_login_label)).assertIsNotEnabled()
     }
 
-    @After
-    fun tearDown() {
+    @Test
+    fun loginButton_enableToggles() {
+        composeTestRule.onNodeWithText(activity.getString(R.string.account_view_login_label)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(activity.getString(R.string.account_view_login_label)).assertIsNotEnabled()
+
+        findUsernameTextInputField().performTextInput("test1")
+
+        composeTestRule.onNodeWithText(activity.getString(R.string.account_view_login_label)).assertIsNotEnabled()
+
+        findPasswordTextInputField().performTextInput("password1")
+
+        composeTestRule.onNodeWithText(activity.getString(R.string.account_view_login_label)).assertIsEnabled()
+    }
+
+    @Test
+    fun performSuccessfulLogin_redirectToWelcomeScreen() {
+
+    }
+
+    @Test
+    fun performFailureLogin_showErrorMessage() {
+
+    }
+
+    private fun findUsernameTextInputField(): SemanticsNodeInteraction {
+        return composeTestRule.onNodeWithText(activity.getString(R.string.account_view_username_label))
+    }
+
+    private fun findPasswordTextInputField(): SemanticsNodeInteraction {
+        return composeTestRule.onNodeWithText(activity.getString(R.string.account_view_password_label))
     }
 }
