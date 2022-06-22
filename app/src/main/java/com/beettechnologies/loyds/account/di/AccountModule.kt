@@ -1,5 +1,8 @@
 package com.beettechnologies.loyds.account.di
 
+import com.beettechnologies.loyds.account.login.data.api.LoginApi
+import com.beettechnologies.loyds.account.login.data.repository.LoginRepositoryImpl
+import com.beettechnologies.loyds.account.login.domain.repository.LoginRepository
 import com.beettechnologies.loyds.account.signup.data.api.SignUpApi
 import com.beettechnologies.loyds.account.signup.data.repository.SignUpRepositoryImpl
 import com.beettechnologies.loyds.account.signup.domain.repository.SignUpRepository
@@ -24,5 +27,17 @@ object AccountModule {
     @Provides
     fun provideSignUpApi(retrofit: Retrofit): SignUpApi {
         return retrofit.create(SignUpApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideLoginRepository(loginApi: LoginApi): LoginRepository {
+        return LoginRepositoryImpl(loginApi)
+    }
+
+    @Singleton
+    @Provides
+    fun provideLoginApi(retrofit: Retrofit): LoginApi {
+        return retrofit.create(LoginApi::class.java)
     }
 }

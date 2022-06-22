@@ -2,6 +2,7 @@ package com.beettechnologies.loyds.common.di
 
 import com.beettechnologies.loyds.BuildConfig
 import com.beettechnologies.loyds.common.interceptor.ApiTokenInterceptor
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,11 +35,15 @@ object CommonModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(client: OkHttpClient): Retrofit {
+    fun provideRetrofit(client: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
             .client(client)
             .baseUrl(BuildConfig.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
+
+    @Singleton
+    @Provides
+    fun provideGson(): Gson = Gson()
 }
