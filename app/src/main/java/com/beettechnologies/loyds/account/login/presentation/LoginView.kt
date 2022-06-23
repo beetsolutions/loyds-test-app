@@ -12,16 +12,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.beettechnologies.loyds.R
+import com.beettechnologies.loyds.app.navigation.Navigation
 import com.beettechnologies.loyds.app.theme.Purple700
 
 @Composable
-@Preview(showBackground = true)
-fun LoginView(modifier: Modifier = Modifier) {
+//@Preview(showBackground = true)
+fun LoginView(modifier: Modifier = Modifier, navigation: Navigation) {
 
     val viewModel = hiltViewModel<LoginViewModel>()
     val isLoading = viewModel.isLoading.collectAsState()
