@@ -4,4 +4,5 @@ import androidx.navigation.NavController
 
 interface Navigation {
     fun setController(controller: NavController)
+    fun navigateToHome()
 }

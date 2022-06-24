@@ -28,11 +28,16 @@ fun LoginView(modifier: Modifier = Modifier, navigation: Navigation) {
     val isLoading = viewModel.isLoading.collectAsState()
     val hasError = viewModel.hasError.collectAsState()
     val errorMessage = viewModel.errorMessage.collectAsState()
+    val loginSuccess = viewModel.loginSuccess.collectAsState()
 
     var username by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
 
     val isValidate by derivedStateOf { username.isNotBlank() && password.isNotBlank() }
+
+    if (loginSuccess.value) {
+        navigation.navigateToHome()
+    }
 
     Column(
         modifier = modifier

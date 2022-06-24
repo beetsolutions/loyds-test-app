@@ -10,4 +10,11 @@ class NavigationImpl @Inject constructor() : Navigation {
     override fun setController(controller: NavController) {
         navController = controller
     }
+
+    override fun navigateToHome() {
+        navController.popBackStack(Screen.Login.route, true)
+        navController.navigate(Screen.Home.route) {
+           launchSingleTop = true
+        }
+    }
 }

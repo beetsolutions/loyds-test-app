@@ -16,6 +16,7 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
     val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val errorMessage: MutableStateFlow<String?> = MutableStateFlow(null)
     val hasError: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val loginSuccess: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
     fun login(username: String, password: String) {
         resetUIState()
@@ -24,11 +25,13 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
                 when(it.status) {
                     Status.SUCCESS -> {
                         isLoading.value = false
+                        loginSuccess.value = true
                     }
                     Status.ERROR -> {
                         isLoading.value = false
                         errorMessage.value = it.message
                         hasError.value = true
+                        loginSuccess.value = false
                     }
                     Status.LOADING -> {
                         isLoading.value = true
