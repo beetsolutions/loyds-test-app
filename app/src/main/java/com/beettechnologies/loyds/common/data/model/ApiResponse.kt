@@ -25,14 +25,19 @@ sealed class ApiResponse<T> {
                     response.message()
                 } else {
                     val error = Gson().fromJson(message, Error::class.java)
-                    error.error
+                    val errorList = error.detail.split(":")
+                    if (errorList.size > 1) {
+                        errorList[1]
+                    } else {
+                        error.detail
+                    }
                 }
                 ApiErrorResponse(errorMessage)
             }
         }
     }
 
-    data class Error(val error: String)
+    data class Error(val detail: String, val code: String)
     class ApiEmptyResponse<T>(val code: Int, val message: String) : ApiResponse<T>()
     data class ApiSuccessResponse<T>(val body: T, val code: Int, val message: String) : ApiResponse<T>()
     data class ApiErrorResponse<T>(val errorMessage: String) : ApiResponse<T>()

@@ -18,6 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.beettechnologies.loyds.R
 import com.beettechnologies.loyds.app.navigation.Navigation
 import com.beettechnologies.loyds.app.theme.Purple700
+import com.beettechnologies.loyds.common.presentation.LoadingView
 
 @Composable
 //@Preview(showBackground = true)
@@ -51,6 +52,16 @@ fun LoginView(modifier: Modifier = Modifier, navigation: Navigation) {
             modifier = modifier.padding(16.dp),
             color = Color.White
         )
+
+        if (hasError.value) {
+            Text(
+                text = errorMessage.value?: "",
+                textAlign = TextAlign.Center,
+                modifier = modifier.padding(16.dp),
+                color = Color.Red
+            )
+        }
+
         TextField(
             value = username,
             onValueChange = {
@@ -116,11 +127,15 @@ fun LoginView(modifier: Modifier = Modifier, navigation: Navigation) {
                 disabledBackgroundColor = Color(0xFFFF5722).copy(alpha = 0.4f)
             )
         ) {
-            Text(
-                text = stringResource(id = R.string.account_view_login_label),
-                fontSize = 18.sp,
-                color = Color.White
-            )
+            if (isLoading.value) {
+                LoadingView()
+            } else {
+                Text(
+                    text = stringResource(id = R.string.account_view_login_label),
+                    fontSize = 18.sp,
+                    color = Color.White
+                )
+            }
         }
 
         Box(

@@ -18,7 +18,7 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
     val hasError: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
     fun login(username: String, password: String) {
-        isLoading.value = true
+        resetUIState()
         viewModelScope.launch {
             loginUseCase(LoginUseCase.Params(username, password)).collectLatest {
                 when(it.status) {
@@ -36,5 +36,11 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
                 }
             }
         }
+    }
+
+    private fun resetUIState() {
+        isLoading.value = true
+        hasError.value = false
+        errorMessage.value = null
     }
 }
