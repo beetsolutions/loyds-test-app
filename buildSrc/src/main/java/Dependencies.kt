@@ -52,6 +52,11 @@ object Dependencies {
     const val hiltTesting = "com.google.dagger:hilt-android-testing:2.37"
     const val navigation = "androidx.hilt:hilt-navigation-compose:1.0.0"
 
+    const val mockk = "io.mockk:mockk:1.12.2"
+    const val mockkAndroid = "io.mockk:mockk-android:1.12.2"
+    const val coreTesting = "androidx.arch.core:core-testing:2.1.0"
+    const val kotlinxCoroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1-native-mt"
+
     val appLibraries = arrayListOf<String>().apply {
         add(kotlinStdLib)
         add(coreKtx)
@@ -94,9 +99,13 @@ object Dependencies {
         add(uiTestJUnit4)
         add(hiltTesting)
         add(hiltAndroid)
+        add(mockkAndroid)
     }
     val testLibraries = arrayListOf<String>().apply {
         add(junit)
+        add(coreTesting)
+        add(mockk)
+        add(kotlinxCoroutinesTest)
     }
     val kaptLibraries = arrayListOf<String>().apply {
         add(lifecycleCompiler)
