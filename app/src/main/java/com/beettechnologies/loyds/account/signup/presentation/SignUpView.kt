@@ -8,6 +8,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -17,7 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,13 +40,16 @@ fun SignUpView(modifier: Modifier = Modifier, navigation: Navigation) {
     val hasError = viewModel.hasError.collectAsState()
     val errorMessage = viewModel.errorMessage.collectAsState()
 
-    var email by remember { mutableStateOf(TextFieldValue("")) }
-    var username by remember { mutableStateOf(TextFieldValue("")) }
-    var password by remember { mutableStateOf(TextFieldValue("")) }
+    var email by rememberSaveable { mutableStateOf("") }
+    var username by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
     val focusManager = LocalFocusManager.current
+
+    val isValidate by derivedStateOf { email.isNotBlank() && username.isNotBlank() && password.isNotBlank() }
 
     if (isSuccessful.value) {
         navigation.navigateBack()
+        viewModel.resetUIState()
     }
 
     Box(
@@ -193,11 +197,15 @@ fun SignUpView(modifier: Modifier = Modifier, navigation: Navigation) {
                     ),
                     keyboardActions = KeyboardActions(onSend = {
                         focusManager.clearFocus()
+                        if (isValidate) {
+                            viewModel.signup(email, username, password)
+                        }
                     }),
                     keyboardOptions = KeyboardOptions.Default.copy(
                         imeAction = ImeAction.Send,
                         keyboardType = KeyboardType.Password
                     ),
+                    visualTransformation = PasswordVisualTransformation()
                 )
             }
 
@@ -208,12 +216,13 @@ fun SignUpView(modifier: Modifier = Modifier, navigation: Navigation) {
                 ) {
                     Button(
                         onClick = {
+                            viewModel.signup(email, username, password)
                         },
                         modifier = modifier
                             .width(200.dp)
                             .padding(top = 16.dp)
                             .align(Alignment.Center),
-                        enabled = false,
+                        enabled = isValidate,
                         elevation = ButtonDefaults.elevation(defaultElevation = 5.dp),
                         shape = CircleShape,
                         colors = ButtonDefaults.buttonColors(

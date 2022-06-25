@@ -41,7 +41,7 @@ class LoginViewModel @Inject constructor(private val loginUseCase: LoginUseCase)
         }
     }
 
-    private fun resetUIState() {
+    fun resetUIState() {
         isLoading.value = true
         hasError.value = false
         errorMessage.value = null

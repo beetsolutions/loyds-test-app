@@ -47,6 +47,7 @@ fun LoginView(modifier: Modifier = Modifier, navigation: Navigation) {
 
     if (loginSuccess.value) {
         navigation.navigateToHome()
+        viewModel.resetUIState()
     }
 
     Box(

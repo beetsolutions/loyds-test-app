@@ -19,6 +19,7 @@ class SignUpViewModel @Inject constructor(private val signUpUseCase: SignUpUseCa
     val isSuccessful: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
     fun signup(email: String, username: String, password: String) {
+        resetUIState()
         viewModelScope.launch {
             signUpUseCase(SignUpUseCase.Params(email, username, password)).collectLatest {
                 when(it.status) {
@@ -38,5 +39,12 @@ class SignUpViewModel @Inject constructor(private val signUpUseCase: SignUpUseCa
                 }
             }
         }
+    }
+
+    fun resetUIState() {
+        isLoading.value = true
+        hasError.value = false
+        hasError.value = false
+        isSuccessful.value = false
     }
 }

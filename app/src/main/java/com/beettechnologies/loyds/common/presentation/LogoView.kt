@@ -3,7 +3,6 @@ package com.beettechnologies.loyds.common.presentation
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,7 +23,7 @@ fun LogoView() {
             text = "Test",
             fontSize = 68.sp,
             color = Color.White,
-            modifier = Modifier.align(Alignment.Center).padding(top = 40.dp, bottom = 20.dp)
+            modifier = Modifier.align(Alignment.Center)
         )
     }
 }
