@@ -1,0 +1,48 @@
+name: CI
+# To test fastlane build commands on your local machine, install fastlane.
+# sudo gem install fastlane -NV
+
+on:
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:
+      - devel
+      - main
+
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+      - synchronize
+      - opened
+      - edited
+      - ready_for_review
+      - unlocked
+
+  # Manual trigger.
+  workflow_dispatch:
+
+jobs:
+  build-and-archive:
+    name: Build and archive application
+    needs: []
+    strategy:
+      matrix:
+        platform: [ubuntu-latest] # , ubuntu-latest
+    runs-on: ${{ matrix.platform }}
+    env:
+      RUN_NUMBER: ${{github.run_number}}
+      GITHUB_WORKFLOW: ${{github.workflow}}
+      GITHUB_REF: ${{github.ref}}
+    steps:
+      - name: Increase file system watchers (linux only??)
+        run: |
+          echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Build
+        run: |
+          ./gradlew clean assembleDebug bundleDebug
+      - name: Unit test
+        run: |
+          ./gradlew test
