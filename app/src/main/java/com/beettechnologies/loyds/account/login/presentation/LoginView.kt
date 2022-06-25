@@ -1,6 +1,7 @@
 package com.beettechnologies.loyds.account.login.presentation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -152,13 +153,17 @@ fun LoginView(modifier: Modifier = Modifier, navigation: Navigation) {
                 text = stringResource(id = R.string.account_view_forgot_password_label),
                 fontSize = 18.sp,
                 color = Color.White,
-                modifier = modifier.align(Alignment.CenterStart)
+                modifier = modifier.align(Alignment.CenterStart).clickable {
+                    navigation.navigateToForgotPassword()
+                }
             )
             Text(
                 text = stringResource(id = R.string.account_view_register_label),
                 fontSize = 18.sp,
                 color = Color.White,
-                modifier = modifier.align(Alignment.CenterEnd)
+                modifier = modifier.align(Alignment.CenterEnd).clickable {
+                    navigation.navigateToRegistration()
+                }
             )
         }
     }

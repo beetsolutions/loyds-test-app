@@ -2,6 +2,7 @@ package com.beettechnologies.loyds.account.signup.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -31,91 +32,159 @@ fun SignUpView(modifier: Modifier = Modifier, navigation: Navigation) {
     var username by remember { mutableStateOf(TextFieldValue("")) }
     var password by remember { mutableStateOf(TextFieldValue("")) }
 
-    Column(
-        modifier = modifier
+    Box(
+        modifier = Modifier
             .fillMaxSize()
-            .background(Purple700),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .background(Purple700)
     ) {
-
-        Icon(
-            painter = painterResource(R.drawable.ic_launcher_foreground),
-            contentDescription = "Logo Icon",
-            modifier = Modifier.wrapContentSize(Alignment.Center)
-        )
-        Text(
-            text = stringResource(R.string.account_view_phone_number_label),
-            textAlign = TextAlign.Center,
-            modifier = modifier.padding(16.dp),
-            color = Color.White
-        )
-
-        TextField(
-            value = username,
-            onValueChange = {
-                username = it
-            },
-            modifier = modifier
+        LazyColumn(
+            modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            label = { Text(text = stringResource(R.string.account_view_username_label)) },
-            placeholder = { Text(text = stringResource(R.string.account_view_username_placeholder_label)) },
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color.White,
-                textColor = Color.Black,
-                placeholderColor = Color.Gray
-            )
-        )
-
-        TextField(
-            value = email,
-            onValueChange = {
-                email = it
-            },
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            label = { Text(text = stringResource(R.string.account_view_email_label)) },
-            placeholder = { Text(text = stringResource(R.string.account_view_email_placeholder_label)) },
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color.White,
-                textColor = Color.Black,
-                placeholderColor = Color.Gray
-            )
-        )
-
-        TextField(
-            value = password,
-            onValueChange = {
-                password = it
-            },
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            label = { Text(text = stringResource(R.string.account_view_password_label)) },
-            placeholder = { Text(text = stringResource(R.string.account_view_password_placeholder_label)) },
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color.White,
-                textColor = Color.Black,
-                placeholderColor = Color.Gray
-            )
-        )
-
-        Button(
-            onClick = {
-
-            },
-            modifier = modifier
-                .width(200.dp)
-                .padding(top = 16.dp),
-            elevation = ButtonDefaults.elevation(defaultElevation = 5.dp),
-            shape = CircleShape,
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = Color(0xFFFF5722),
-                disabledBackgroundColor = Color(0xFFFF5722).copy(alpha = 0.4f)
-            )
         ) {
-            Text(text = stringResource(R.string.account_view_signup_label), fontSize = 18.sp, color = Color.White)
+
+            item {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 8.dp, end = 16.dp)
+                ) {
+
+                    IconButton(onClick = {
+                        navigation.navigateBack()
+                    }, modifier = Modifier.align(Alignment.CenterStart)) {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_arrow_back),
+                            contentDescription = "Back Icon",
+                            tint = Color.White,
+                            modifier = Modifier.padding(end = 16.dp)
+                        )
+                    }
+
+                    Text(
+                        text = "Registration",
+                        color = Color.White,
+                        style = MaterialTheme.typography.h6,
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+            }
+
+            item {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_launcher_foreground),
+                        contentDescription = "Logo Icon",
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+            }
+
+            item {
+                Text(
+                    text = stringResource(R.string.account_view_phone_number_label),
+                    textAlign = TextAlign.Center,
+                    modifier = modifier.padding(16.dp),
+                    color = Color.White
+                )
+            }
+
+            item {
+                TextField(
+                    value = username,
+                    onValueChange = {
+                        username = it
+                    },
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    label = { Text(text = stringResource(R.string.account_view_username_label)) },
+                    placeholder = { Text(text = stringResource(R.string.account_view_username_placeholder_label)) },
+                    colors = TextFieldDefaults.textFieldColors(
+                        backgroundColor = Color.White,
+                        textColor = Color.Black,
+                        placeholderColor = Color.Gray
+                    )
+                )
+            }
+
+            item {
+                TextField(
+                    value = email,
+                    onValueChange = {
+                        email = it
+                    },
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    label = {
+                        Text(
+                            text = stringResource(id = R.string.account_view_email_label),
+                        )
+                    },
+                    placeholder = {
+                        Text(
+                            text = stringResource(id = R.string.account_view_email_placeholder_label),
+                        )
+                    },
+                    colors = TextFieldDefaults.textFieldColors(
+                        backgroundColor = Color.White,
+                        textColor = Color.Black,
+                        placeholderColor = Color.Gray
+                    )
+                )
+            }
+
+            item {
+                TextField(
+                    value = password,
+                    onValueChange = {
+                        password = it
+                    },
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    label = { Text(text = stringResource(R.string.account_view_password_label)) },
+                    placeholder = { Text(text = stringResource(R.string.account_view_password_placeholder_label)) },
+                    colors = TextFieldDefaults.textFieldColors(
+                        backgroundColor = Color.White,
+                        textColor = Color.Black,
+                        placeholderColor = Color.Gray
+                    )
+                )
+            }
+
+            item {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Button(
+                        onClick = {
+                        },
+                        modifier = modifier
+                            .width(200.dp)
+                            .padding(top = 16.dp)
+                            .align(Alignment.Center),
+                        enabled = false,
+                        elevation = ButtonDefaults.elevation(defaultElevation = 5.dp),
+                        shape = CircleShape,
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = Color(0xFFFF5722),
+                            disabledBackgroundColor = Color(0xFFFF5722).copy(alpha = 0.4f)
+                        )
+                    ) {
+
+                        Text(
+                            text = stringResource(id = R.string.account_view_signup_label),
+                            fontSize = 18.sp,
+                            color = Color.White
+                        )
+                    }
+                }
+            }
         }
     }
 }

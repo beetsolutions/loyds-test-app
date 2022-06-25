@@ -17,4 +17,24 @@ class NavigationImpl @Inject constructor() : Navigation {
            launchSingleTop = true
         }
     }
+
+    override fun navigateToRegistration() {
+        navController.navigate(Screen.Register.route) {
+            restoreState = true
+        }
+    }
+
+    override fun navigateToForgotPassword() {
+        navController.navigate(Screen.ForgotPassword.route) {
+            restoreState = true
+        }
+    }
+
+    override fun navigateToLogin() {
+        navController.navigate(Screen.Login.route)
+    }
+
+    override fun navigateBack() {
+        navController.popBackStack()
+    }
 }
