@@ -4,13 +4,19 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -31,6 +37,7 @@ fun SignUpView(modifier: Modifier = Modifier, navigation: Navigation) {
     var email by remember { mutableStateOf(TextFieldValue("")) }
     var username by remember { mutableStateOf(TextFieldValue("")) }
     var password by remember { mutableStateOf(TextFieldValue("")) }
+    val focusManager = LocalFocusManager.current
 
     Box(
         modifier = Modifier
@@ -106,7 +113,16 @@ fun SignUpView(modifier: Modifier = Modifier, navigation: Navigation) {
                         backgroundColor = Color.White,
                         textColor = Color.Black,
                         placeholderColor = Color.Gray
-                    )
+                    ),
+                    keyboardActions = KeyboardActions(onNext = {
+                        focusManager.moveFocus(
+                            FocusDirection.Next
+                        )
+                    }),
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        imeAction = ImeAction.Next,
+                        keyboardType = KeyboardType.Text
+                    ),
                 )
             }
 
@@ -133,7 +149,16 @@ fun SignUpView(modifier: Modifier = Modifier, navigation: Navigation) {
                         backgroundColor = Color.White,
                         textColor = Color.Black,
                         placeholderColor = Color.Gray
-                    )
+                    ),
+                    keyboardActions = KeyboardActions(onNext = {
+                        focusManager.moveFocus(
+                            FocusDirection.Next
+                        )
+                    }),
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        imeAction = ImeAction.Next,
+                        keyboardType = KeyboardType.Email
+                    ),
                 )
             }
 
@@ -152,7 +177,14 @@ fun SignUpView(modifier: Modifier = Modifier, navigation: Navigation) {
                         backgroundColor = Color.White,
                         textColor = Color.Black,
                         placeholderColor = Color.Gray
-                    )
+                    ),
+                    keyboardActions = KeyboardActions(onSend = {
+                        focusManager.clearFocus()
+                    }),
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        imeAction = ImeAction.Send,
+                        keyboardType = KeyboardType.Password
+                    ),
                 )
             }
 

@@ -4,17 +4,23 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.beettechnologies.loyds.R
 import com.beettechnologies.loyds.app.navigation.Navigation
 import com.beettechnologies.loyds.app.theme.Purple700
@@ -22,6 +28,8 @@ import com.beettechnologies.loyds.app.theme.Purple700
 @Composable
 fun ForgotPasswordView(modifier: Modifier = Modifier, navigation: Navigation) {
 
+    val viewModel = hiltViewModel<ForgotPasswordViewModel>()
+    val focusManager = LocalFocusManager.current
     var email by rememberSaveable { mutableStateOf("") }
     val isValidate by derivedStateOf { email.isNotBlank() }
 
@@ -107,7 +115,14 @@ fun ForgotPasswordView(modifier: Modifier = Modifier, navigation: Navigation) {
                         backgroundColor = Color.White,
                         textColor = Color.Black,
                         placeholderColor = Color.Gray
-                    )
+                    ),
+                    keyboardActions = KeyboardActions(onSend = {
+                        focusManager.clearFocus()
+                    }),
+                    keyboardOptions = KeyboardOptions.Default.copy(
+                        imeAction = ImeAction.Send,
+                        keyboardType = KeyboardType.Email
+                    ),
                 )
             }
 
