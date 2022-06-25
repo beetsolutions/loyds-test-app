@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -28,6 +27,7 @@ import com.beettechnologies.loyds.R
 import com.beettechnologies.loyds.app.navigation.Navigation
 import com.beettechnologies.loyds.app.theme.Purple700
 import com.beettechnologies.loyds.common.presentation.LoadingView
+import com.beettechnologies.loyds.common.presentation.LogoView
 
 @Composable
 //@Preview(showBackground = true)
@@ -59,21 +59,12 @@ fun LoginView(modifier: Modifier = Modifier, navigation: Navigation) {
                 .fillMaxWidth()
         ) {
             item {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_launcher_foreground),
-                        contentDescription = "Logo Icon",
-                        modifier = Modifier.align(Alignment.Center)
-                    )
-                }
+                LogoView()
             }
 
             item {
                 Text(
-                    text = stringResource(R.string.account_view_phone_number_label),
+                    text = stringResource(R.string.account_view_description_label),
                     textAlign = TextAlign.Center,
                     modifier = modifier.padding(16.dp),
                     color = Color.White

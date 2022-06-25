@@ -24,6 +24,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.beettechnologies.loyds.R
 import com.beettechnologies.loyds.app.navigation.Navigation
 import com.beettechnologies.loyds.app.theme.Purple700
+import com.beettechnologies.loyds.common.presentation.LogoView
 
 @Composable
 fun ForgotPasswordView(modifier: Modifier = Modifier, navigation: Navigation) {
@@ -71,21 +72,12 @@ fun ForgotPasswordView(modifier: Modifier = Modifier, navigation: Navigation) {
             }
 
             item {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_launcher_foreground),
-                        contentDescription = "Logo Icon",
-                        modifier = Modifier.align(Alignment.Center)
-                    )
-                }
+                LogoView()
             }
 
             item {
                 Text(
-                    text = stringResource(R.string.account_view_phone_number_label),
+                    text = stringResource(R.string.account_view_description_label),
                     textAlign = TextAlign.Center,
                     modifier = modifier.padding(16.dp),
                     color = Color.White

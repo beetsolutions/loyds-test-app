@@ -20,7 +20,7 @@ class LoginViewTest {
 
     @Test
     fun loginUiElementsShown() {
-        composeTestRule.onNodeWithText(activity.getString(R.string.account_view_phone_number_label)).assertIsDisplayed()
+        composeTestRule.onNodeWithText(activity.getString(R.string.account_view_description_label)).assertIsDisplayed()
         composeTestRule.onNodeWithText(activity.getString(R.string.account_view_username_label)).assertIsDisplayed()
         composeTestRule.onNodeWithText(activity.getString(R.string.account_view_username_placeholder_label)).assertIsDisplayed()
         composeTestRule.onNodeWithText(activity.getString(R.string.account_view_password_label)).assertIsDisplayed()
