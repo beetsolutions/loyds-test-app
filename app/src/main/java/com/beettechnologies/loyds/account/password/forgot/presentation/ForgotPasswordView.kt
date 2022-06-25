@@ -24,6 +24,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.beettechnologies.loyds.R
 import com.beettechnologies.loyds.app.navigation.Navigation
 import com.beettechnologies.loyds.app.theme.Purple700
+import com.beettechnologies.loyds.common.presentation.LoadingView
 import com.beettechnologies.loyds.common.presentation.LogoView
 
 @Composable
@@ -33,6 +34,16 @@ fun ForgotPasswordView(modifier: Modifier = Modifier, navigation: Navigation) {
     val focusManager = LocalFocusManager.current
     var email by rememberSaveable { mutableStateOf("") }
     val isValidate by derivedStateOf { email.isNotBlank() }
+
+    val isLoading = viewModel.isLoading.collectAsState()
+    val isSuccessful = viewModel.isSuccessful.collectAsState()
+    val hasError = viewModel.hasError.collectAsState()
+    val errorMessage = viewModel.errorMessage.collectAsState()
+
+    if (isSuccessful.value) {
+        navigation.navigateBack()
+        viewModel.resetUIState()
+    }
 
     Box(
         modifier = Modifier
@@ -85,6 +96,19 @@ fun ForgotPasswordView(modifier: Modifier = Modifier, navigation: Navigation) {
             }
 
             item {
+                if (hasError.value) {
+                    Text(
+                        text = errorMessage.value ?: "",
+                        textAlign = TextAlign.Center,
+                        modifier = modifier
+                            .padding(16.dp)
+                            .fillMaxWidth(),
+                        color = Color.Red
+                    )
+                }
+            }
+
+            item {
                 TextField(
                     value = email,
                     onValueChange = {
@@ -110,6 +134,9 @@ fun ForgotPasswordView(modifier: Modifier = Modifier, navigation: Navigation) {
                     ),
                     keyboardActions = KeyboardActions(onSend = {
                         focusManager.clearFocus()
+                        if (isValidate) {
+                            viewModel.resetPassword(email)
+                        }
                     }),
                     keyboardOptions = KeyboardOptions.Default.copy(
                         imeAction = ImeAction.Send,
@@ -125,6 +152,7 @@ fun ForgotPasswordView(modifier: Modifier = Modifier, navigation: Navigation) {
                 ) {
                     Button(
                         onClick = {
+                            viewModel.resetPassword(email)
                         },
                         modifier = modifier
                             .width(200.dp)
@@ -138,12 +166,15 @@ fun ForgotPasswordView(modifier: Modifier = Modifier, navigation: Navigation) {
                             disabledBackgroundColor = Color(0xFFFF5722).copy(alpha = 0.4f)
                         )
                     ) {
-
-                        Text(
-                            text = stringResource(id = R.string.account_view_reset_password_label),
-                            fontSize = 18.sp,
-                            color = Color.White
-                        )
+                        if (isLoading.value) {
+                            LoadingView()
+                        } else {
+                            Text(
+                                text = stringResource(id = R.string.account_view_reset_password_label),
+                                fontSize = 18.sp,
+                                color = Color.White
+                            )
+                        }
                     }
                 }
             }

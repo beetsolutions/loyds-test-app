@@ -20,18 +20,22 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.beettechnologies.loyds.R
 import com.beettechnologies.loyds.app.navigation.Navigation
+import com.beettechnologies.loyds.app.navigation.NavigationPreviewParameterProvider
 import com.beettechnologies.loyds.app.theme.Purple700
 import com.beettechnologies.loyds.common.presentation.LoadingView
 import com.beettechnologies.loyds.common.presentation.LogoView
 
 @Composable
-//@Preview(showBackground = true)
-fun SignUpView(modifier: Modifier = Modifier, navigation: Navigation) {
+@Preview(showBackground = true)
+fun SignUpView(modifier: Modifier = Modifier,
+               @PreviewParameter(NavigationPreviewParameterProvider::class) navigation: Navigation) {
 
     val viewModel = hiltViewModel<SignUpViewModel>()
 

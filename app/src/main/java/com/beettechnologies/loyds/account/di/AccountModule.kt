@@ -3,6 +3,9 @@ package com.beettechnologies.loyds.account.di
 import com.beettechnologies.loyds.account.login.data.api.LoginApi
 import com.beettechnologies.loyds.account.login.data.repository.LoginRepositoryImpl
 import com.beettechnologies.loyds.account.login.domain.repository.LoginRepository
+import com.beettechnologies.loyds.account.password.forgot.data.api.ForgotPasswordApi
+import com.beettechnologies.loyds.account.password.forgot.data.repository.ForgotPasswordRepositoryImpl
+import com.beettechnologies.loyds.account.password.forgot.domain.repository.ForgotPasswordRepository
 import com.beettechnologies.loyds.account.signup.data.api.SignUpApi
 import com.beettechnologies.loyds.account.signup.data.repository.SignUpRepositoryImpl
 import com.beettechnologies.loyds.account.signup.domain.repository.SignUpRepository
@@ -39,5 +42,17 @@ object AccountModule {
     @Provides
     fun provideLoginApi(retrofit: Retrofit): LoginApi {
         return retrofit.create(LoginApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideForgotPasswordRepository(forgotPasswordApi: ForgotPasswordApi): ForgotPasswordRepository {
+        return ForgotPasswordRepositoryImpl(forgotPasswordApi)
+    }
+
+    @Singleton
+    @Provides
+    fun provideForgotPasswordApi(retrofit: Retrofit): ForgotPasswordApi {
+        return retrofit.create(ForgotPasswordApi::class.java)
     }
 }
