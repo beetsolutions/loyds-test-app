@@ -15,11 +15,11 @@ import javax.inject.Inject
 
 class SignUpRepositoryImpl @Inject constructor(private val signUpApi: SignUpApi) : SignUpRepository {
 
-    override suspend fun signup(email: String, username: String, password: String): Flow<Resource<UserModel>> {
-        return object : NetworkResource<UserModel, SignUpResponse>() {
-            override suspend fun loadResults(item: SignUpResponse?): Flow<UserModel> {
+    override suspend fun signup(email: String, username: String, password: String): Flow<Resource<Boolean>> {
+        return object : NetworkResource<Boolean, SignUpResponse>() {
+            override suspend fun loadResults(item: SignUpResponse?): Flow<Boolean> {
                 return flow {
-
+                     emit(true)
                 }
             }
 
