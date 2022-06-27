@@ -45,16 +45,6 @@ class LoginViewTest {
         composeTestRule.onNodeWithText(activity.getString(R.string.account_view_login_label)).assertIsEnabled()
     }
 
-    @Test
-    fun performSuccessfulLogin_redirectToWelcomeScreen() {
-
-    }
-
-    @Test
-    fun performFailureLogin_showErrorMessage() {
-
-    }
-
     private fun findUsernameTextInputField(): SemanticsNodeInteraction {
         return composeTestRule.onNodeWithText(activity.getString(R.string.account_view_username_label))
     }

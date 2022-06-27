@@ -34,6 +34,7 @@ class LoginViewModelTest {
         assertEquals(sut.errorMessage.value, ERROR_MESSAGE)
         assertEquals(sut.hasError.value, true)
         assertEquals(sut.isLoading.value, false)
+        assertEquals(sut.loginSuccess.value, false)
         coVerify { loginUseCase(any()) }
     }
 
@@ -45,6 +46,7 @@ class LoginViewModelTest {
         assertEquals(sut.errorMessage.value, null)
         assertEquals(sut.hasError.value, false)
         assertEquals(sut.isLoading.value, false)
+        assertEquals(sut.loginSuccess.value, true)
         coVerify { loginUseCase(any()) }
     }
 
@@ -56,6 +58,7 @@ class LoginViewModelTest {
         assertEquals(sut.errorMessage.value, null)
         assertEquals(sut.hasError.value, false)
         assertEquals(sut.isLoading.value, true)
+        assertEquals(sut.loginSuccess.value, false)
         coVerify { loginUseCase(any()) }
     }
 
