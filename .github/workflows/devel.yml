@@ -34,6 +34,7 @@ jobs:
       RUN_NUMBER: ${{github.run_number}}
       GITHUB_WORKFLOW: ${{github.workflow}}
       GITHUB_REF: ${{github.ref}}
+      API_KEY: ${{ secrets.API_KEY }}
     steps:
       - name: Increase file system watchers (linux only??)
         run: |
