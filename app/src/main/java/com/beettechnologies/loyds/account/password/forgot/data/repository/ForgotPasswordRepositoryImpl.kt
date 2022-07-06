@@ -10,7 +10,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.net.UnknownHostException
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class ForgotPasswordRepositoryImpl @Inject constructor(private val forgotPasswordApi: ForgotPasswordApi) :
     ForgotPasswordRepository {
 

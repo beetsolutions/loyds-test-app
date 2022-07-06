@@ -2,7 +2,9 @@ package com.beettechnologies.loyds.app.navigation
 
 import androidx.navigation.NavController
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class NavigationImpl @Inject constructor() : Navigation {
 
     private lateinit var navController: NavController

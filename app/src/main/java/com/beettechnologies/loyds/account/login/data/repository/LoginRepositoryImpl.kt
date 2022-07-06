@@ -14,7 +14,9 @@ import java.net.UnknownHostException
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class LoginRepositoryImpl @Inject constructor(private val loginApi: LoginApi) : LoginRepository {
 
     override suspend fun login(username: String, password: String): Flow<Resource<UserModel>> {
