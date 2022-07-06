@@ -1,7 +1,11 @@
 import java.util.*
 
-val properties = Properties().apply {
-    load(rootProject.file("local.properties").reader())
+val properties = Properties()
+val file = rootProject.file("local.properties")
+
+try {
+    properties.load(file.reader())
+} catch (e: Exception) {
 }
 
 plugins {
