@@ -6,6 +6,7 @@ import com.beettechnologies.loyds.account.password.forgot.domain.interactor.Forg
 import com.beettechnologies.loyds.common.data.model.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,10 +15,17 @@ import javax.inject.Inject
 class ForgotPasswordViewModel @Inject constructor(private val forgotPasswordUseCase: ForgotPasswordUseCase) :
     ViewModel() {
 
-    val isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val errorMessage: MutableStateFlow<String?> = MutableStateFlow(null)
-    val hasError: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val isSuccessful: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    private val _isLoading: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading
+
+    private val _errorMessage: MutableStateFlow<String?> = MutableStateFlow(null)
+    val errorMessage: StateFlow<String?> = _errorMessage
+
+    private val _hasError: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val hasError: StateFlow<Boolean> = _hasError
+
+    private val _isSuccessful: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val isSuccessful: StateFlow<Boolean> = _isSuccessful
 
     fun resetPassword(email: String) {
         resetUIState()
@@ -25,17 +33,17 @@ class ForgotPasswordViewModel @Inject constructor(private val forgotPasswordUseC
             forgotPasswordUseCase(ForgotPasswordUseCase.Params(email)).collectLatest {
                 when (it.status) {
                     Status.SUCCESS -> {
-                        isLoading.value = false
-                        isSuccessful.value = true
+                        _isLoading.value = false
+                        _isSuccessful.value = true
                     }
                     Status.ERROR -> {
-                        isLoading.value = false
-                        errorMessage.value = it.message
-                        hasError.value = true
-                        isSuccessful.value = false
+                        _isLoading.value = false
+                        _errorMessage.value = it.message
+                        _hasError.value = true
+                        _isSuccessful.value = false
                     }
                     Status.LOADING -> {
-                        isLoading.value = true
+                        _isLoading.value = true
                     }
                 }
             }
@@ -43,9 +51,9 @@ class ForgotPasswordViewModel @Inject constructor(private val forgotPasswordUseC
     }
 
     fun resetUIState() {
-        isLoading.value = true
-        hasError.value = false
-        hasError.value = false
-        isSuccessful.value = false
+        _isLoading.value = true
+        _hasError.value = false
+        _hasError.value = false
+        _isSuccessful.value = false
     }
 }
