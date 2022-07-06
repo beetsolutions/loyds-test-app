@@ -22,6 +22,6 @@ class ApiTokenInterceptor : Interceptor {
         const val CONTENT_TYPE = "Content-Type"
         const val AUTHORIZATION = "Authorization"
         const val BEARER = "Bearer"
-        const val API_KEY = "ZGE0YzAxYWUtNTI1MC00N2IzLWEyMWItM2IyMzI1NzUwODI4"
+        const val API_KEY = "ZGE0YzAxYWUtNTI1MC00N2IzLWEyMWItM2IyMzI1NzUwODI4" // TODO Move to CI env for production usage.
     }
 }
