@@ -1,7 +1,5 @@
 package com.beettechnologies.loyds.common.data.repository
 
-import androidx.annotation.MainThread
-import androidx.annotation.WorkerThread
 import com.beettechnologies.loyds.common.data.model.ApiResponse
 import com.beettechnologies.loyds.common.data.model.Resource
 import kotlinx.coroutines.flow.Flow
@@ -33,12 +31,9 @@ abstract class NetworkResource<ResultType, RequestType> {
         }
     }
 
-    @WorkerThread
     protected open fun processResponse(r: ApiResponse.ApiSuccessResponse<RequestType>) =  r.body
 
-    @WorkerThread
     protected abstract suspend fun loadResults(item: RequestType? = null): Flow<ResultType>
 
-    @MainThread
     protected abstract suspend fun createCall(): ApiResponse<RequestType>
 }
