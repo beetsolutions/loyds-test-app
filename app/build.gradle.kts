@@ -1,3 +1,9 @@
+import java.util.*
+
+val properties = Properties().apply {
+    load(rootProject.file("local.properties").reader())
+}
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -22,6 +28,8 @@ android {
             useSupportLibrary = true
         }
 
+        val apiKey = properties["API_KEY"]?.toString() ?: System.getenv("API_KEY")
+        buildConfigField("String", "API_KEY", "\"$apiKey\"")
         buildConfigField("String", "BASE_URL", "\"https://api.m3o.com\"")
     }
 
