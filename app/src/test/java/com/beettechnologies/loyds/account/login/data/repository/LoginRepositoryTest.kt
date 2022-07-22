@@ -1,7 +1,5 @@
 package com.beettechnologies.loyds.account.login.data.repository
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.beettechnologies.loyds.CoroutineTestRule
 import com.beettechnologies.loyds.account.login.data.api.LoginApi
 import com.beettechnologies.loyds.account.login.data.mapper.UserMapper
 import com.beettechnologies.loyds.account.login.domain.repository.LoginRepository
@@ -17,19 +15,12 @@ import kotlinx.coroutines.test.runTest
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.Assert.assertEquals
-import org.junit.Rule
 import org.junit.Test
 import retrofit2.Response
 import java.net.UnknownHostException
 
 @ExperimentalCoroutinesApi
 class LoginRepositoryTest {
-
-    @get:Rule
-    val mainCoroutineRule = CoroutineTestRule()
-
-    @get:Rule
-    val instantExecutorRule = InstantTaskExecutorRule()
 
     private val loginApi = mockk<LoginApi>()
 
