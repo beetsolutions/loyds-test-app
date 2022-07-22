@@ -3,6 +3,7 @@ package com.beettechnologies.loyds.account.login.data.repository
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.beettechnologies.loyds.CoroutineTestRule
 import com.beettechnologies.loyds.account.login.data.api.LoginApi
+import com.beettechnologies.loyds.account.login.data.mapper.UserMapper
 import com.beettechnologies.loyds.account.login.domain.repository.LoginRepository
 import com.beettechnologies.loyds.account.signup.domain.model.UserModel
 import com.beettechnologies.loyds.common.data.model.Resource
@@ -32,7 +33,7 @@ class LoginRepositoryTest {
 
     private val loginApi = mockk<LoginApi>()
 
-    private val sut: LoginRepository = LoginRepositoryImpl(loginApi)
+    private val sut: LoginRepository = LoginRepositoryImpl(loginApi, UserMapper())
 
     @Test
     fun `sign in , bad user credentials, return Error`() = runTest {
