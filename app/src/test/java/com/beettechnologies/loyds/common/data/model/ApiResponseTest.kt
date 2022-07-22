@@ -2,7 +2,6 @@ package com.beettechnologies.loyds.common.data.model
 
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody.Companion.toResponseBody
-import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,14 +15,14 @@ class ApiResponseTest  {
     fun `test error message`() {
         val exception = Exception("Oops! Something went wrong")
         val (errorMessage) = ApiResponse.create<Any>(exception)
-        assertThat(errorMessage, `is`("Oops! Something went wrong"))
+        assertEquals(errorMessage, "Oops! Something went wrong")
     }
 
     @Test
     fun `test successful http request`() {
         val apiResponse: ApiResponse.ApiSuccessResponse<Any> = ApiResponse
             .create<Any>(Response.success("success")) as ApiResponse.ApiSuccessResponse<Any>
-        assertThat(apiResponse.body, `is`("success"))
+        assertEquals(apiResponse.body, "success")
     }
 
     @Test
@@ -33,6 +32,6 @@ class ApiResponseTest  {
             "{ detail: \"Oops! Something went wrong\", code: \"400\" }".toResponseBody("application/json".toMediaTypeOrNull()))
 
         val (errorMessage) = ApiResponse.create<Any>(errorResponse) as ApiResponse.ApiErrorResponse<Any>
-        assertThat(errorMessage, `is`("Oops! Something went wrong"))
+        assertEquals(errorMessage, "Oops! Something went wrong")
     }
 }
